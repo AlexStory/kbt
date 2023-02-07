@@ -2,14 +2,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Board {
-    pub lanes: Vec<Lane>,   
+    pub lanes: Vec<Lane>,
 }
 
 impl Board {
     pub fn new() -> Self {
-        Self {
-            lanes: vec![],
-        }
+        Self { lanes: vec![] }
     }
 
     pub fn add_lane(&mut self, lane: Lane) {
@@ -30,6 +28,10 @@ impl Lane {
             cards: vec![],
         }
     }
+
+    pub fn add(&mut self, card: Card) {
+        self.cards.push(card);
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -39,9 +41,9 @@ pub struct Card {
 }
 
 impl Card {
-    pub fn new(title: String) -> Self {
+    pub fn new(title: &str) -> Self {
         Self {
-            title,
+            title: title.to_string(),
             description: None,
         }
     }

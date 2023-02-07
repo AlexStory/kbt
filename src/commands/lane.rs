@@ -1,4 +1,7 @@
-use crate::{kanban::{Lane, Board}, persist};
+use crate::{
+    kanban::{Board, Lane},
+    persist,
+};
 
 pub fn handle_list(lanes: Vec<Lane>) {
     if lanes.is_empty() {
@@ -13,7 +16,12 @@ pub fn handle_list(lanes: Vec<Lane>) {
 
 pub fn handle_view(lane: Option<Lane>) {
     match lane {
-        Some(lane) => println!("Lane: {}", lane.name),
+        Some(lane) => {
+            println!("Lane: {}", lane.name);
+            for card in lane.cards {
+                println!("\t{}", card.title);
+            }
+        }
         None => println!("No lane found"),
     }
 }
